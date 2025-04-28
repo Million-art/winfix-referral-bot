@@ -1,0 +1,44 @@
+npm install --save-dev sequelize-cli
+npx sequelize-cli init
+
+# Database Migration Commands for Referral Bot
+
+# Initialize database and run all migrations
+npm run migrate
+
+# Create the database (MySQL)
+mysql -u root -p -e "CREATE DATABASE your_database_name"
+
+# Run specific migrations
+npx sequelize-cli db:migrate --to 20240705000001-create-users.js
+npx sequelize-cli db:migrate --to 20240705000002-create-referrals.js
+npx sequelize-cli db:migrate --to 20240705000003-create-weekly-winners.js
+npx sequelize-cli db:migrate --to 20240705000004-create-this-week-winners.js
+npx sequelize-cli db:migrate --to 20240705000005-create-monthly-winners.js
+
+# Undo last migration
+npm run migrate:undo
+
+# Undo specific migration
+npx sequelize-cli db:migrate:undo --name 20240705000005-create-monthly-winners.js
+
+# Undo all migrations
+npm run migrate:undo:all
+
+# Reset the entire database (drop, create, and migrate)
+npm run db:reset
+
+# Create a new migration file
+npx sequelize-cli migration:generate --name add-new-field-to-users
+
+# Get migration status
+npx sequelize-cli db:migrate:status
+
+# Run migrations for specific environment
+NODE_ENV=production npx sequelize-cli db:migrate
+
+# Seed data (if you create seeders)
+npx sequelize-cli db:seed:all
+
+# Undo seed data
+npx sequelize-cli db:seed:undo:all
